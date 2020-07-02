@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $("#search").on("click", function () {
     var location = $("#location").val().trim();
-    console.log(location + "Best City Ever!");
+    console.log(location);
 
     // append city to list #myCities
     var cityButton = $("<button>")
@@ -12,6 +12,7 @@ $(document).ready(function () {
       });
 
     $("#myCities").append(cityButton);
+    $("#location").val("");
   });
 });
 
@@ -77,7 +78,7 @@ function currentWeather(city) {
       todayEl.appendChild(cardBodyEl);
     });
 }
-//currentWeather;
+// end currentWeather;
 
 function getForcast(city) {
   fetch(
@@ -87,6 +88,7 @@ function getForcast(city) {
   )
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       let forecast = document.querySelector("#forecast");
       forecast.textContent = "";
 
@@ -97,45 +99,50 @@ function getForcast(city) {
 
       forecast.classList.add("row");
 
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < data.list.length; i++) {
         const currentDay = data.list[i];
         // make boostrap card
-        var foreCardEl = document.createElement("div");
-        foreCardEl.classList.add("card-body");
+        if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+          var newDay = document.createElement("div");
+          newDay.classList.add("card");
+          var foreCardEl = document.createElement("div");
+          foreCardEl.classList.add("card-body");
 
-        //date
-        var foreDate = document.createElement("h3");
-        foreDate.classList.add("card-title");
-        foreDate.textContent = "(" + new Date().toLocaleDateString() + ")";
-        var newDay = document.createElement("div");
-        newDay.classList.add("card");
+          //date
+          var foreDate = document.createElement("h3");
+          foreDate.classList.add("card-title");
+          foreDate.textContent =
+            "(" + new Date(data.list[i].dt_txt).toLocaleDateString() + ")";
 
-        // icon
-        var newIcon = document.createElement("img");
-        newIcon.setAttribute(
-          "src",
-          "https://openweathermap.org/img/w/" +
-            currentDay.weather[0].icon +
-            ".png"
-        );
+          // icon
+          var newIcon = document.createElement("img");
+          newIcon.setAttribute(
+            "src",
+            "https://openweathermap.org/img/w/" +
+              currentDay.weather[0].icon +
+              ".png"
+          );
 
-        // temp
-        var newTemp = document.createElement("p");
-        newTemp.classList.add("card-text");
+          // temp
+          var newTemp = document.createElement("p");
+          newTemp.classList.add("card-text");
 
-        // humidity
-        var newHumid = document.createElement("p");
-        newHumid.classList.add("card-text");
+          // humidity
+          var newHumid = document.createElement("p");
+          newHumid.classList.add("card-text");
 
-        if (currentDay.main.temp) {
-          newTemp.textContent = `Temp: ${currentDay.main.temp}`;
+          if (currentDay.main.temp) {
+            newTemp.textContent = `Temp: ${currentDay.main.temp}`;
+          }
+          newHumid.textContent = `Humidity: ${currentDay.main.humidity}%`;
+
+          foreCardEl.appendChild(newIcon);
+          foreCardEl.appendChild(foreDate);
+          foreCardEl.appendChild(newTemp);
+          foreCardEl.appendChild(newHumid);
+          newDay.appendChild(foreCardEl);
+          forecast.appendChild(newDay);
         }
-        newHumid.textContent = `Humidity: ${currentDay.main.humidity}%`;
-
-        forecast.appendChild(newIcon);
-        forecast.appendChild(foreDate);
-        forecast.appendChild(newTemp);
-        forecast.appendChild(newHumid);
       }
     });
 }
