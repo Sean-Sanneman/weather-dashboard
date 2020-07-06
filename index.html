@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Weather Dashboard</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark text-white text-center">
+    <nav class="container-fluid-nav text-center navbar-dark bg-dark text-white">
       <h1>Weather Dashboard</h1>
     </nav>
     <div class="container-fluid">
@@ -37,7 +38,9 @@
         </div>
         <div class="col-md-10">
           <div class="row" id="current-weather"><h4>Current Weather:</h4></div>
-          <div class="row" id="forecast"><h4>5-Day Forecast:</h4></div>
+          <div class="row" id="forecast">
+            <h4>5-Day Forecast:</h4>
+          </div>
         </div>
       </div>
     </div>

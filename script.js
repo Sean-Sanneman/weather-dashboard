@@ -106,7 +106,7 @@ function getForcast(city) {
           var newDay = document.createElement("div");
           newDay.classList.add("card");
           var foreCardEl = document.createElement("div");
-          foreCardEl.classList.add("card-body");
+          foreCardEl.classList.add("fore-card");
 
           //date
           var foreDate = document.createElement("h3");
@@ -136,8 +136,8 @@ function getForcast(city) {
           }
           newHumid.textContent = `Humidity: ${currentDay.main.humidity}%`;
 
-          foreCardEl.appendChild(newIcon);
           foreCardEl.appendChild(foreDate);
+          foreCardEl.appendChild(newIcon);
           foreCardEl.appendChild(newTemp);
           foreCardEl.appendChild(newHumid);
           newDay.appendChild(foreCardEl);
