@@ -5,5 +5,5 @@ The Weather Dashboard app gives you the current weather, and a five day forecast
 
 ![image](https://user-images.githubusercontent.com/64930571/86564116-7dde5880-bf1a-11ea-87a8-aa866d4d74c1.png)
 
-
+![image](https://user-images.githubusercontent.com/64930571/86564217-b120e780-bf1a-11ea-9a1f-b7c52a3b4d6b.png)
 
